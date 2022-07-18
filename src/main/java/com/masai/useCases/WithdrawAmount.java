@@ -10,7 +10,7 @@ import com.masai.EMUtility.Account;
 
 public class WithdrawAmount {
 
-	public static void main(String[] args) throws InsufficientBalance {
+	public static void main(String[] args)  {
 		
 			AccountDao ad=new AccountDaoImpl();
 			Scanner sc=new Scanner (System.in);
@@ -22,9 +22,16 @@ public class WithdrawAmount {
 			int amount=sc.nextInt();
 			try {
 				Account acc=ad.findById(accId);
-				int amount1=ad.withdraw(amount, acc);
+				int amount1;
+				try {
+					amount1 = ad.withdraw(amount, acc);
+					System.out.println(amount1);
+				} catch (InsufficientBalance e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
-				System.out.println(amount1);
+				
 				
 			}
 			catch(InvalidAccount ia){
