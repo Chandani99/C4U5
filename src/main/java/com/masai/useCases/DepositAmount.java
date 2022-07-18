@@ -26,7 +26,7 @@ public class DepositAmount {
 			
 	    }
 		catch(InvalidAccount ia) {
-			
+			ia.getMessage();
 		}
 	}
 

@@ -49,12 +49,12 @@ public class AccountDaoImpl implements AccountDao{
 	@Override
 	public int withdraw(double amount, Account account) throws InsufficientBalance {
 		EntityManager em=GetEntityManager.provideEntityManager();
-		Account acc=em.find(Account.class, account);
+		
 		em.getTransaction().begin();
-		double balance=acc.getBalance();
+		double balance=account.getBalance();
 		int remain=(int) ((int)balance-amount);
 		balance-=amount;
-		acc.setBalance(balance);
+		account.setBalance(balance);
 		em.persist(account);
 		em.getTransaction().commit();
 		em.close();
@@ -65,10 +65,10 @@ public class AccountDaoImpl implements AccountDao{
 	public String deposit(double amount, Account account) throws InvalidAccount {
 		String msg="";
 		EntityManager em=GetEntityManager.provideEntityManager();
-		Account acc=em.find(Account.class, account);
+		
 		em.getTransaction().begin();
-		acc.getBalance();
-		acc.setBalance(acc.getBalance()+amount);
+		
+		account.setBalance(account.getBalance()+amount);
 		em.persist(account);
 		em.getTransaction().commit();
 		em.close();
